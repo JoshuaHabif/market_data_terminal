@@ -57,6 +57,8 @@ def tick_data():
         code = 'https://finnhub.io/api/v1/stock/tick?symbol=' +\
                 symbol + '&date=' + date + '&token=' + config.API_KEY
         r = requests.get(code)
+        if(r != '<Response [200]>'):
+                exception()  
         file_name = symbol + '_' + date + '.csv'
         out = open(config.MISC_OUTPUT_PATH + file_name, 'w')
         out.write(r.text)
@@ -86,7 +88,7 @@ def on_open(ws):
     ws.send('{"type":"subscribe","symbol":"' + symbol + '"}')
 
 def exception():
-        print('Invalid response.\nTerminating.\n')
+        print('Error.\nTerminating.\n')
         exit(0)
         return
 
