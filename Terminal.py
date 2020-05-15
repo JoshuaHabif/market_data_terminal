@@ -84,8 +84,10 @@ def on_close(ws):
     print("### closed ###")
 
 def on_open(ws):
-    symbol = input('\tSymbol: ').upper()
-    ws.send('{"type":"subscribe","symbol":"' + symbol + '"}')
+        streams = int(input('\tEnter number of streams: '))
+        for i in range(0,streams):
+                symbol = input('\tSymbol: ').upper()
+                ws.send('{"type":"subscribe","symbol":"' + symbol + '"}')
 
 def exception():
         print('Error.\nTerminating.\n')
@@ -98,8 +100,6 @@ def terminate():
         return   
 
 def prompt():
-
-
         menu_str = STR_SECTION + '''
                 \n\tMarket Data Request: 
                 \n\t1 -- Tick Data
